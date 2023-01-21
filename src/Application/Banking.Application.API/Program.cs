@@ -1,4 +1,7 @@
-internal class Program
+using Banking.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+
+internal class Startup
 {
     private static void Main(string[] args)
     {
@@ -11,6 +14,8 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -18,6 +23,12 @@ internal class Program
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+        }
+
+        using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
+        {
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<BankingContext>();
+            dbContext.Database.Migrate();
         }
 
         app.UseHttpsRedirection();
