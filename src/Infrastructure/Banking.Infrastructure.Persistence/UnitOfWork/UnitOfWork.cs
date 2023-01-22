@@ -23,7 +23,7 @@ namespace Banking.Infrastructure.Persistence.UnitOfWork
 
         public async Task BeginTransactionAsync()
         {
-            await Context.Database.BeginTransactionAsync();
+            await Context.Database.BeginTransactionAsync(System.Data.IsolationLevel.ReadCommitted);
         }
 
         public async Task CommitTransactionAsync()
