@@ -5,15 +5,17 @@ using System.Linq.Expressions;
 
 namespace Banking.Infrastructure.Persistence.Repository.EFCore
 {
-    public class RepositoryEF<TEntity> : IRepositoryEF<TEntity> where TEntity : class
+    public class RepositoryEF<TEntity, TContext> : IRepositoryEF<TEntity, TContext>
+        where TEntity : class
+        where TContext : DbContext
     {
-        protected readonly IUnitOfWork<DbContext> _unitOfWork;
+        protected readonly IUnitOfWork<TContext> _unitOfWork;
 
         protected readonly DbSet<TEntity> _dbSet;
 
-        public RepositoryEF(DbContext context)
+        public RepositoryEF(IUnitOfWork<TContext> unitOfWork)
         {
-            _unitOfWork = new UnitOfWork<DbContext>(context);
+            _unitOfWork = unitOfWork;
             _dbSet = _unitOfWork.Context.Set<TEntity>();
         }
 

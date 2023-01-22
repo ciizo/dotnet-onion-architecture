@@ -21,8 +21,7 @@ internal class Startup
 
         builder.Services.AddScoped<IAccountService, AccountService>();
 
-        builder.Services.AddScoped<DbContext, BankingContext>();
-        builder.Services.AddScoped(typeof(IRepositoryEF<>), typeof(RepositoryEF<>));
+        builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
         builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
         var app = builder.Build();
