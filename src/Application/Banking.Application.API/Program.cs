@@ -1,4 +1,5 @@
 using Banking.Domain.Service.AccountLogic;
+using Banking.Domain.Service.TransactionLogic;
 using Banking.Infrastructure.Persistence;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
@@ -22,6 +23,7 @@ internal class Startup
         builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
 
         builder.Services.AddScoped<IAccountService, AccountService>();
+        builder.Services.AddScoped<ITransactionService, TransactionService>();
 
         builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
         builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
