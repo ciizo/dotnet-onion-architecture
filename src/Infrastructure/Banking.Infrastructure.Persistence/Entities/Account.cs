@@ -13,7 +13,7 @@ namespace Banking.Infrastructure.Persistence.Entities
         public decimal Balance { get; set; }
         public DateTime CreatedOn { get; set; }
 
-        public ICollection<Transaction> TransactionsOut { get; set; }
-        public ICollection<Transaction> TransactionsIn { get; set; }
+        public ICollection<Transaction>? TransactionsOut { get; set; }
+        public ICollection<Transaction>? TransactionsIn { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Banking.Infrastructure.Persistence.Entities
         public decimal Amount { get; set; }
         public DateTime CreatedOn { get; set; }
 
-        public Account SourceAccount { get; set; }
-        public Account DestinationAccount { get; set; }
+        public Account? SourceAccount { get; set; }
+        public Account? DestinationAccount { get; set; }
     }
 }
