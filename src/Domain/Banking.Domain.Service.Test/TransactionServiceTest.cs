@@ -1,52 +1,43 @@
-using Banking.Domain.Service.AccountLogic;
-using Banking.Domain.Service.Dto;
+using Banking.Domain.Service.TransactionLogic;
 using Banking.Infrastructure.Persistence;
 using Banking.Infrastructure.Persistence.Entities;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
-using DeepEqual.Syntax;
+using Banking.Infrastructure.Share.Constants;
 
 namespace Banking.Domain.Service.Test
 {
-    public class AccountServiceTest
+    public class TransactionServiceTest
     {
-        private AccountService _accountService;
+        private TransactionService _transactionService;
 
         private void SetUp(Account[] initialEntities)
         {
             var dbContextMock = TestHelper.GetDbContext(initialEntities);
             var uow = new UnitOfWork<BankingContext>(dbContextMock.Object);
-            _accountService = new AccountService(new IBAN_ServiceMock(),
+            _transactionService = new TransactionService(
+                new RepositoryEF<Transaction, BankingContext>(uow),
                 new RepositoryEF<Account, BankingContext>(uow),
                 uow);
         }
 
         [Fact]
-        public async Task Get_ReturnAll()
+        public async Task Deposit_Success()
         {
             var random = new Random();
+            var amount = 1000;
             var id = Guid.NewGuid();
             var account = new Account() { ID = id, IBAN = random.NextInt64(0, 100).ToString(), CreatedOn = DateTime.UtcNow };
             var initialEntities = new[] { account };
             SetUp(initialEntities);
 
-            var result = await _accountService.GetAccountById(id);
+            var result = await _transactionService.Deposit(id, amount);
 
-            AccountDto.FromEntity(account).ShouldDeepEqual(result);
-        }
-
-        [Fact]
-        public async Task Create_Success()
-        {
-            var accountDto = new AccountDto() { ID = Guid.NewGuid() };
-            SetUp(null);
-
-            var result = await _accountService.CreateAccount(accountDto);
-
-            Assert.NotNull(result);
-            Assert.Equal(accountDto.ID, result?.ID);
-            Assert.NotNull(result?.IBAN);
-            Assert.NotEqual("", result?.IBAN);
+            Assert.Equal(FeeService.ApplyFee(Enums.TransactionType.Deposit, amount), result.Amount);
+            Assert.Equal(Enums.TransactionStatus.Success, result.Status);
+            Assert.Equal(Enums.TransactionType.Deposit, result.Type);
+            Assert.Equal(id, result.DestinationAccountID);
+            Assert.Null(result.SourceAccountID);
         }
     }
 }
