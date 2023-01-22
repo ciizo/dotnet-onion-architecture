@@ -16,8 +16,11 @@ namespace Banking.Domain.Service.Test
 
         private void SetUp(Account[] initialEntities)
         {
-            var _dbContextMock = GetDbContext(initialEntities);
-            _accountService = new AccountService(new RepositoryEF<Account>(_dbContextMock.Object), new UnitOfWork<BankingContext>(_dbContextMock.Object));
+            var dbContextMock = GetDbContext(initialEntities);
+            var uow = new UnitOfWork<BankingContext>(dbContextMock.Object);
+            _accountService = new AccountService(new IBAN_ServiceMock(),
+                new RepositoryEF<Account, BankingContext>(uow),
+                uow);
         }
 
         private DbContextMock<BankingContext> GetDbContext(Account[] initialEntities)
@@ -39,6 +42,20 @@ namespace Banking.Domain.Service.Test
             var result = await _accountService.GetAccountById(id);
 
             AccountDto.FromEntity(account).ShouldDeepEqual(result);
+        }
+
+        [Fact]
+        public async Task Create_Success()
+        {
+            var accountDto = new AccountDto() { ID = Guid.NewGuid() };
+            SetUp(null);
+
+            var result = await _accountService.CreateAccount(accountDto);
+
+            Assert.NotNull(result);
+            Assert.Equal(accountDto.ID, result?.ID);
+            Assert.NotNull(result?.IBAN);
+            Assert.NotEqual("", result?.IBAN);
         }
     }
 }

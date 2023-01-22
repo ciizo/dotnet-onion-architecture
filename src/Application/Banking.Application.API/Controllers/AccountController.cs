@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Banking.Application.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]s")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -16,9 +16,17 @@ namespace Banking.Application.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAccountById([FromRoute] Guid id)
+        public async Task<IActionResult> GetAccount([FromRoute] Guid id)
         {
             var result = await _accountService.GetAccountById(id);
+
+            return Ok(ResponseAPI.Ok(result));
+        }
+
+        [HttpPost("")]
+        public async Task<IActionResult> CreateAccount()
+        {
+            var result = await _accountService.CreateAccount(new Domain.Service.Dto.AccountDto());
 
             return Ok(ResponseAPI.Ok(result));
         }

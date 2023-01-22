@@ -19,5 +19,15 @@ namespace Banking.Domain.Service.Dto
                 CreatedOn = entity.CreatedOn,
             };
         }
+
+        public static Account ToEntity(AccountDto dto)
+        {
+            return new Account()
+            {
+                ID = dto.ID,
+                IBAN = dto.IBAN,
+                CreatedOn = dto.CreatedOn,
+            };
+        }
     }
 }

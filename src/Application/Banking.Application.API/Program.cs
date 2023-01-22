@@ -17,12 +17,16 @@ internal class Startup
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddHttpClient();
+
         builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
 
         builder.Services.AddScoped<IAccountService, AccountService>();
 
         builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
         builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+
+        builder.Services.AddScoped<IIBAN_Service, IBAN_Service>();
 
         var app = builder.Build();
 

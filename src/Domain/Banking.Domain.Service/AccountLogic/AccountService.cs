@@ -8,12 +8,17 @@ namespace Banking.Domain.Service.AccountLogic
 {
     public class AccountService : IAccountService
     {
-        protected IRepositoryEF<Account> _repository;
+        private IRepositoryEF<Account, BankingContext> _repository;
 
-        protected IUnitOfWork<BankingContext> _uow;
+        private IUnitOfWork<BankingContext> _uow;
 
-        public AccountService(IRepositoryEF<Account> repository, IUnitOfWork<BankingContext> uow)
+        private readonly IIBAN_Service _ibanService;
+
+        public AccountService(IIBAN_Service ibanService,
+            IRepositoryEF<Account, BankingContext> repository,
+            IUnitOfWork<BankingContext> uow)
         {
+            _ibanService = ibanService;
             _repository = repository;
             _uow = uow;
         }
@@ -21,6 +26,18 @@ namespace Banking.Domain.Service.AccountLogic
         public async Task<AccountDto> GetAccountById(Guid id)
         {
             return AccountDto.FromEntity(await _repository.GetByIdAsync(id));
+        }
+
+        public async Task<AccountDto> CreateAccount(AccountDto dto)
+        {
+            var entity = AccountDto.ToEntity(dto);
+            entity.IBAN = await _ibanService.GenerateIBAN();
+            entity.CreatedOn = DateTime.UtcNow;
+
+            _repository.Insert(entity);
+            await _uow.CommitAsync();
+
+            return AccountDto.FromEntity(entity);
         }
     }
 }
