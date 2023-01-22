@@ -9,6 +9,6 @@ namespace Banking.Infrastructure.Persistence
         {
         }
 
-        public DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
     }
 }

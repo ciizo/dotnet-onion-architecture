@@ -1,4 +1,7 @@
+using Banking.Domain.Service.AccountLogic;
 using Banking.Infrastructure.Persistence;
+using Banking.Infrastructure.Persistence.Repository.EFCore;
+using Banking.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 internal class Startup
@@ -15,6 +18,12 @@ internal class Startup
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
+
+        builder.Services.AddScoped<IAccountService, AccountService>();
+
+        builder.Services.AddScoped<DbContext, BankingContext>();
+        builder.Services.AddScoped(typeof(IRepositoryEF<>), typeof(RepositoryEF<>));
+        builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
 
         var app = builder.Build();
 
