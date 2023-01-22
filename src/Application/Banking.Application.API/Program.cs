@@ -21,15 +21,8 @@ internal class Startup
 
         builder.Services.AddHttpClient();
 
-        builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
-
-        builder.Services.AddScoped<IAccountService, AccountService>();
-        builder.Services.AddScoped<ITransactionService, TransactionService>();
-
-        builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
-        builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-
-        builder.Services.AddScoped<IIBAN_Service, IBAN_Service>();
+        RegisterServices(builder);
+        RegisterPersistence(builder);
 
         var app = builder.Build();
 
@@ -40,19 +33,43 @@ internal class Startup
             app.UseSwaggerUI();
         }
 
+        InitDatabase(app);
+        RegisterMiddlewares(app);
+
+        app.MapControllers();
+
+        app.Run();
+    }
+
+    private static void RegisterServices(WebApplicationBuilder builder)
+    {
+        builder.Services.AddScoped<IAccountService, AccountService>();
+        builder.Services.AddScoped<ITransactionService, TransactionService>();
+
+        builder.Services.AddScoped<IIBAN_Service, IBAN_Service>();
+    }
+
+    private static void RegisterPersistence(WebApplicationBuilder builder)
+    {
+        builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
+        builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
+        builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+    }
+
+    private static void RegisterMiddlewares(WebApplication app)
+    {
+        app.UseHttpsRedirection();
+
+        app.UseMiddleware<ExceptionMiddleware>();
+        app.UseAuthorization();
+    }
+
+    private static void InitDatabase(WebApplication app)
+    {
         using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
         {
             var dbContext = serviceScope.ServiceProvider.GetRequiredService<BankingContext>();
             dbContext.Database.Migrate();
         }
-
-        app.UseHttpsRedirection();
-
-        app.UseMiddleware<ExceptionMiddleware>();
-        app.UseAuthorization();
-
-        app.MapControllers();
-
-        app.Run();
     }
 }
