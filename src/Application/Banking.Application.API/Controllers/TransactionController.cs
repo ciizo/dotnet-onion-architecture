@@ -20,7 +20,7 @@ namespace Banking.Application.API.Controllers
         public async Task<IActionResult> Deposit([FromBody] DepositRequest req)
         {
             var result = await _transactionService.Deposit(req.AccountId, req.Amount);
-
+            // TODO map to UI model or format response if need
             return Ok(ResponseAPI.Ok(result));
         }
 
@@ -28,7 +28,7 @@ namespace Banking.Application.API.Controllers
         public async Task<IActionResult> Tranfer([FromBody] TransferRequest req)
         {
             var result = await _transactionService.Transfer(req.FromAccountId, req.ToAccountId, req.Amount);
-
+            // TODO map to UI model or format response if need
             return Ok(ResponseAPI.Ok(result));
         }
     }

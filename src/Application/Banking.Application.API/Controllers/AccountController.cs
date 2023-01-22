@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Banking.Application.API.Controllers
 {
-    [Route("api/[controller]s")]
+    [Route("api/accounts")]
     [ApiController]
     public class AccountController : ControllerBase
     {

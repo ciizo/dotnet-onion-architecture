@@ -1,10 +1,4 @@
-using Banking.Application.API.Middlewares;
-using Banking.Domain.Service.AccountLogic;
-using Banking.Domain.Service.TransactionLogic;
-using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.Repository.EFCore;
-using Banking.Infrastructure.Persistence.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
+using Banking.Application.API;
 
 internal class Startup
 {
@@ -21,15 +15,8 @@ internal class Startup
 
         builder.Services.AddHttpClient();
 
-        builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
-
-        builder.Services.AddScoped<IAccountService, AccountService>();
-        builder.Services.AddScoped<ITransactionService, TransactionService>();
-
-        builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
-        builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-
-        builder.Services.AddScoped<IIBAN_Service, IBAN_Service>();
+        builder.RegisterServices();
+        builder.RegisterPersistence();
 
         var app = builder.Build();
 
@@ -40,16 +27,8 @@ internal class Startup
             app.UseSwaggerUI();
         }
 
-        using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
-        {
-            var dbContext = serviceScope.ServiceProvider.GetRequiredService<BankingContext>();
-            dbContext.Database.Migrate();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseMiddleware<ExceptionMiddleware>();
-        app.UseAuthorization();
+        app.InitDatabase();
+        app.RegisterMiddlewares();
 
         app.MapControllers();
 

@@ -5,6 +5,10 @@ namespace Banking.Domain.Service.AccountLogic
 {
     public class IBAN_Service : IIBAN_Service
     {
+        /// <summary>
+        /// TODO clone logic from js on website http://randomiban.com/?country=Netherlands
+        /// </summary>
+        /// <returns></returns>
         public async Task<string> GenerateIBAN()
         {
             string iban;
