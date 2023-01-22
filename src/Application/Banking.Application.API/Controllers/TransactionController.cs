@@ -23,5 +23,13 @@ namespace Banking.Application.API.Controllers
 
             return Ok(ResponseAPI.Ok(result));
         }
+
+        [HttpPost("transfer")]
+        public async Task<IActionResult> Tranfer([FromBody] TransferRequest req)
+        {
+            var result = await _transactionService.Transfer(req.FromAccountId, req.ToAccountId, req.Amount);
+
+            return Ok(ResponseAPI.Ok(result));
+        }
     }
 }
