@@ -1,3 +1,4 @@
+using Banking.Application.API.Middlewares;
 using Banking.Domain.Service.AccountLogic;
 using Banking.Domain.Service.TransactionLogic;
 using Banking.Infrastructure.Persistence;
@@ -47,6 +48,7 @@ internal class Startup
 
         app.UseHttpsRedirection();
 
+        app.UseMiddleware<ExceptionMiddleware>();
         app.UseAuthorization();
 
         app.MapControllers();

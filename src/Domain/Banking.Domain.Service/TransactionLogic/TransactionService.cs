@@ -24,19 +24,29 @@ namespace Banking.Domain.Service.TransactionLogic
             _uow = uow;
         }
 
-        public async Task<TransactionDto> Deposit(Guid toAccountId, decimal amount)
+        public async Task<TransactionDto> Deposit(Guid accountId, decimal amount)
         {
+            if (accountId == default)
+            {
+                throw new ArgumentException("accountId is required");
+            }
+
+            if (amount <= 0)
+            {
+                throw new ArgumentException("amount must be greater than 0");
+            }
+
             var entity = new Transaction()
             {
                 Type = Enums.TransactionType.Deposit,
                 Status = Enums.TransactionStatus.Success,
-                DestinationAccountID = toAccountId,
+                DestinationAccountID = accountId,
                 CreatedOn = DateTime.UtcNow,
             };
             entity.Amount = FeeService.ApplyFee(entity.Type, amount);
             //TODO maybe need to create transaction type Fee with central account as DestinationAccount
 
-            var destAccount = await _accountRepository.GetByIdAsync(toAccountId);
+            var destAccount = await _accountRepository.GetByIdAsync(accountId);
             destAccount.Balance += amount;
 
             _accountRepository.Update(destAccount);

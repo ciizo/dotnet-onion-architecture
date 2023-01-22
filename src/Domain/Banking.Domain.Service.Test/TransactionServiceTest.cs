@@ -39,5 +39,19 @@ namespace Banking.Domain.Service.Test
             Assert.Equal(id, result.DestinationAccountID);
             Assert.Null(result.SourceAccountID);
         }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        public async Task Deposit_InvalidInput(decimal amount)
+        {
+            var random = new Random();
+            var id = Guid.NewGuid();
+            var account = new Account() { ID = id, IBAN = random.NextInt64(0, 100).ToString(), CreatedOn = DateTime.UtcNow };
+            var initialEntities = new[] { account };
+            SetUp(initialEntities);
+
+            var ex = await Assert.ThrowsAsync<ArgumentException>(async () => await _transactionService.Deposit(id, amount));
+        }
     }
 }
