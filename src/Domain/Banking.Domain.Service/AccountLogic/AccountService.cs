@@ -8,9 +8,9 @@ namespace Banking.Domain.Service.AccountLogic
 {
     public class AccountService : IAccountService
     {
-        private IRepositoryEF<Account, BankingContext> _repository;
+        private readonly IRepositoryEF<Account, BankingContext> _repository;
 
-        private IUnitOfWork<BankingContext> _uow;
+        private readonly IUnitOfWork<BankingContext> _uow;
 
         private readonly IIBAN_Service _ibanService;
 
