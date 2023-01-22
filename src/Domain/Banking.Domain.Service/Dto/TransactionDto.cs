@@ -29,19 +29,5 @@ namespace Banking.Domain.Service.Dto
                 CreatedOn = entity.CreatedOn,
             };
         }
-
-        public static Transaction ToEntity(TransactionDto dto)
-        {
-            return new Transaction()
-            {
-                ID = dto.ID,
-                SourceAccountID = dto.SourceAccountID,
-                DestinationAccountID = dto.DestinationAccountID,
-                Status = dto.Status,
-                Type = dto.Type,
-                Amount = dto.Amount,
-                CreatedOn = dto.CreatedOn,
-            };
-        }
     }
 }
