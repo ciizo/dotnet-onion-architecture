@@ -16,7 +16,7 @@ namespace Banking.Application.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetUnseenCountAsync([FromRoute] Guid id)
+        public async Task<IActionResult> GetAccountById([FromRoute] Guid id)
         {
             var result = await _accountService.GetAccountById(id);
 
