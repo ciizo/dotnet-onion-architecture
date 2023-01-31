@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Banking.Infrastructure.Persistence.Repository.Base
+namespace Banking.Domain.Entities.Repository.Base
 {
     public interface IReadRepository<TEntity> where TEntity : class
     {

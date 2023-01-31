@@ -1,4 +1,4 @@
-﻿namespace Banking.Infrastructure.Persistence.Repository.Base
+﻿namespace Banking.Domain.Entities.Repository.Base
 {
     public interface IWriteRepository<TEntity> where TEntity : class
     {

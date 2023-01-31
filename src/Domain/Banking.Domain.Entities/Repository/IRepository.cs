@@ -1,11 +1,10 @@
-﻿using Banking.Infrastructure.Persistence.Repository.Base;
-using Microsoft.EntityFrameworkCore;
+﻿using Banking.Domain.Entities.Repository.Base;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace Banking.Infrastructure.Persistence.Repository.EFCore
+namespace Banking.Domain.Entities.Repository
 {
-    public interface IRepositoryEF<TEntity, TContext> : IWriteRepository<TEntity>, IReadRepository<TEntity>, IDisposable
+    public interface IRepository<TEntity, TContext> : IWriteRepository<TEntity>, IReadRepository<TEntity>, IDisposable
         where TEntity : class
     {
         IEnumerable<TEntity> GetInclude(Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? includeFunc = null);

@@ -1,21 +1,21 @@
 ﻿using Banking.Domain.Entities;
+using Banking.Domain.Entities.Repository;
 using Banking.Domain.Service.Dto;
 using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
 
 namespace Banking.Domain.Service.AccountLogic
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepositoryEF<Account, BankingContext> _repository;
+        private readonly IRepository<Account, BankingContext> _repository;
 
         private readonly IUnitOfWork<BankingContext> _uow;
 
         private readonly IIBAN_Service _ibanService;
 
         public AccountService(IIBAN_Service ibanService,
-            IRepositoryEF<Account, BankingContext> repository,
+            IRepository<Account, BankingContext> repository,
             IUnitOfWork<BankingContext> uow)
         {
             _ibanService = ibanService;

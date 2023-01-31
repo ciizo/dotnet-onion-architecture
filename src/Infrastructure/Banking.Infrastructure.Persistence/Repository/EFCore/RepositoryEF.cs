@@ -1,11 +1,12 @@
-﻿using Banking.Infrastructure.Persistence.UnitOfWork;
+﻿using Banking.Domain.Entities.Repository;
+using Banking.Infrastructure.Persistence.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
 namespace Banking.Infrastructure.Persistence.Repository.EFCore
 {
-    public class RepositoryEF<TEntity, TContext> : IRepositoryEF<TEntity, TContext>
+    public class RepositoryEF<TEntity, TContext> : IRepository<TEntity, TContext>
         where TEntity : class
         where TContext : DbContext
     {

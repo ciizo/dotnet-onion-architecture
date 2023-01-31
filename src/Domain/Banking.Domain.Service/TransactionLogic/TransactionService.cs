@@ -1,7 +1,7 @@
 ﻿using Banking.Domain.Entities;
+using Banking.Domain.Entities.Repository;
 using Banking.Domain.Service.Dto;
 using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
 using Banking.Infrastructure.Share.Constants;
 using Microsoft.EntityFrameworkCore;
@@ -10,14 +10,14 @@ namespace Banking.Domain.Service.TransactionLogic
 {
     public class TransactionService : ITransactionService
     {
-        private readonly IRepositoryEF<Transaction, BankingContext> _repository;
-        private readonly IRepositoryEF<Account, BankingContext> _accountRepository;
+        private readonly IRepository<Transaction, BankingContext> _repository;
+        private readonly IRepository<Account, BankingContext> _accountRepository;
 
         private readonly IUnitOfWork<BankingContext> _uow;
 
         public TransactionService(
-            IRepositoryEF<Transaction, BankingContext> repository,
-            IRepositoryEF<Account, BankingContext> accountRepository,
+            IRepository<Transaction, BankingContext> repository,
+            IRepository<Account, BankingContext> accountRepository,
             IUnitOfWork<BankingContext> uow)
         {
             _repository = repository;

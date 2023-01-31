@@ -21,7 +21,7 @@ namespace Banking.Application.API
         public static void RegisterPersistence(this WebApplicationBuilder builder)
         {
             builder.Services.AddDbContextSql<BankingContext>(builder.Configuration);
-            builder.Services.AddScoped(typeof(IRepositoryEF<,>), typeof(RepositoryEF<,>));
+            builder.Services.AddScoped(typeof(IRepository<,>), typeof(RepositoryEF<,>));
             builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
         }
 
