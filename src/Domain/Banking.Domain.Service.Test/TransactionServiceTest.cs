@@ -1,6 +1,6 @@
 using Banking.Domain.Entities;
+using Banking.Domain.Entities.Repository;
 using Banking.Domain.Service.TransactionLogic;
-using Banking.Infrastructure.Persistence;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
 using Banking.Infrastructure.Share.Constants;
@@ -14,10 +14,10 @@ namespace Banking.Domain.Service.Test
         private void SetUp(Account[] initialEntities)
         {
             var dbContextMock = TestHelper.GetDbContext(initialEntities);
-            var uow = new UnitOfWork<BankingContext>(dbContextMock.Object);
+            var uow = new UnitOfWork<IDbContext>(dbContextMock.Object);
             _transactionService = new TransactionService(
-                new RepositoryEF<Transaction, BankingContext>(uow),
-                new RepositoryEF<Account, BankingContext>(uow),
+                new RepositoryEF<Transaction, IDbContext>(uow),
+                new RepositoryEF<Account, IDbContext>(uow),
                 uow);
         }
 

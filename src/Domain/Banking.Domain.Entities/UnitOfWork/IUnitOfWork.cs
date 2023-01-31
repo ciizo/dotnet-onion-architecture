@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Banking.Domain.Entities.Repository;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Banking.Domain.Entities.UnitOfWork
 {
-    public interface IUnitOfWork<TContext> : IDisposable where TContext : DbContext
+    public interface IUnitOfWork<TContext> : IDisposable
+        where TContext : IDbContext
     {
         TContext Context { get; }
 

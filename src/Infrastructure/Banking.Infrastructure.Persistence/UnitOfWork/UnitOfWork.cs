@@ -1,9 +1,10 @@
-﻿using Banking.Domain.Entities.UnitOfWork;
+﻿using Banking.Domain.Entities.Repository;
+using Banking.Domain.Entities.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Infrastructure.Persistence.UnitOfWork
 {
-    public class UnitOfWork<TContext> : IUnitOfWork<TContext> where TContext : DbContext
+    public class UnitOfWork<TContext> : IUnitOfWork<TContext> where TContext : IDbContext
     {
         public TContext Context { get; }
 

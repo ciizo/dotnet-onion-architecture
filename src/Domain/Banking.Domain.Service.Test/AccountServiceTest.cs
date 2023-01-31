@@ -1,7 +1,7 @@
 using Banking.Domain.Entities;
+using Banking.Domain.Entities.Repository;
 using Banking.Domain.Service.AccountLogic;
 using Banking.Domain.Service.Dto;
-using Banking.Infrastructure.Persistence;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
 using DeepEqual.Syntax;
@@ -15,9 +15,9 @@ namespace Banking.Domain.Service.Test
         private void SetUp(Account[] initialEntities)
         {
             var dbContextMock = TestHelper.GetDbContext(initialEntities);
-            var uow = new UnitOfWork<BankingContext>(dbContextMock.Object);
+            var uow = new UnitOfWork<IDbContext>(dbContextMock.Object);
             _accountService = new AccountService(new IBAN_ServiceMock(),
-                new RepositoryEF<Account, BankingContext>(uow),
+                new RepositoryEF<Account, IDbContext>(uow),
                 uow);
         }
 

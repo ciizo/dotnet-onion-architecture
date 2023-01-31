@@ -8,7 +8,7 @@ namespace Banking.Infrastructure.Persistence.Repository.EFCore
 {
     public class RepositoryEF<TEntity, TContext> : IRepository<TEntity, TContext>
         where TEntity : class
-        where TContext : DbContext
+        where TContext : IDbContext
     {
         protected readonly IUnitOfWork<TContext> _unitOfWork;
 

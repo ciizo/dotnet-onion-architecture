@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\Banking.Infrastructure.Persistence\Banking.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\Banking.Domain.Entities\Banking.Domain.Entities.csproj" />
   </ItemGroup>
 

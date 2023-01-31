@@ -2,21 +2,20 @@
 using Banking.Domain.Entities.Repository;
 using Banking.Domain.Entities.UnitOfWork;
 using Banking.Domain.Service.Dto;
-using Banking.Infrastructure.Persistence;
 
 namespace Banking.Domain.Service.AccountLogic
 {
     public class AccountService : IAccountService
     {
-        private readonly IRepository<Account, BankingContext> _repository;
+        private readonly IRepository<Account, IDbContext> _repository;
 
-        private readonly IUnitOfWork<BankingContext> _uow;
+        private readonly IUnitOfWork<IDbContext> _uow;
 
         private readonly IIBAN_Service _ibanService;
 
         public AccountService(IIBAN_Service ibanService,
-            IRepository<Account, BankingContext> repository,
-            IUnitOfWork<BankingContext> uow)
+            IRepository<Account, IDbContext> repository,
+            IUnitOfWork<IDbContext> uow)
         {
             _ibanService = ibanService;
             _repository = repository;
