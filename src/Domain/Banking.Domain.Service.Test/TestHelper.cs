@@ -1,5 +1,5 @@
+using Banking.Domain.Entities;
 using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.Entities;
 using EntityFrameworkCoreMock;
 using Microsoft.EntityFrameworkCore;
 

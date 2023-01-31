@@ -1,6 +1,6 @@
-﻿using Banking.Domain.Service.Dto;
+﻿using Banking.Domain.Entities;
+using Banking.Domain.Service.Dto;
 using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.Entities;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
 

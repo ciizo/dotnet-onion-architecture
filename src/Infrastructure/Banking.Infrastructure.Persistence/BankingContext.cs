@@ -1,4 +1,4 @@
-﻿using Banking.Infrastructure.Persistence.Entities;
+﻿using Banking.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Infrastructure.Persistence

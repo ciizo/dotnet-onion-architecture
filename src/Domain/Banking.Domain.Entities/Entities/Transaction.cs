@@ -1,7 +1,7 @@
 ﻿using Banking.Infrastructure.Share.Constants;
 using System.ComponentModel.DataAnnotations;
 
-namespace Banking.Infrastructure.Persistence.Entities
+namespace Banking.Domain.Entities
 {
     public class Transaction
     {

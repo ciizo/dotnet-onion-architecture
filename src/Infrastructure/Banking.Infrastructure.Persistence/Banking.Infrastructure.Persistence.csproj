@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Banking.Domain.Entities\Banking.Domain.Entities.csproj" />
     <ProjectReference Include="..\Banking.Infrastructure.Share\Banking.Infrastructure.Share.csproj" />
   </ItemGroup>
 

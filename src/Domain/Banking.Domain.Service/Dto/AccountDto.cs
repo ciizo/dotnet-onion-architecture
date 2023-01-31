@@ -1,4 +1,4 @@
-﻿using Banking.Infrastructure.Persistence.Entities;
+﻿using Banking.Domain.Entities;
 
 namespace Banking.Domain.Service.Dto
 {
