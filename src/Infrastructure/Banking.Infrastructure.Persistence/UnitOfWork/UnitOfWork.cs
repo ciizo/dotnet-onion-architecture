@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Banking.Domain.Entities.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Infrastructure.Persistence.UnitOfWork
 {

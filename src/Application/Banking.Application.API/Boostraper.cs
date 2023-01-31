@@ -1,4 +1,6 @@
 ﻿using Banking.Application.API.Middlewares;
+using Banking.Domain.Entities.Repository;
+using Banking.Domain.Entities.UnitOfWork;
 using Banking.Domain.Service.AccountLogic;
 using Banking.Domain.Service.TransactionLogic;
 using Banking.Infrastructure.Persistence;

@@ -1,5 +1,5 @@
 ﻿using Banking.Domain.Entities.Repository;
-using Banking.Infrastructure.Persistence.UnitOfWork;
+using Banking.Domain.Entities.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;

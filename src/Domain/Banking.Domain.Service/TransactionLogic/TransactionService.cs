@@ -1,8 +1,8 @@
 ﻿using Banking.Domain.Entities;
 using Banking.Domain.Entities.Repository;
+using Banking.Domain.Entities.UnitOfWork;
 using Banking.Domain.Service.Dto;
 using Banking.Infrastructure.Persistence;
-using Banking.Infrastructure.Persistence.UnitOfWork;
 using Banking.Infrastructure.Share.Constants;
 using Microsoft.EntityFrameworkCore;
 

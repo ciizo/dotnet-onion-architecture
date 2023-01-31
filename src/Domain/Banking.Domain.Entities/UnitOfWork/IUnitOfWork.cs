@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Banking.Infrastructure.Persistence.UnitOfWork
+namespace Banking.Domain.Entities.UnitOfWork
 {
     public interface IUnitOfWork<TContext> : IDisposable where TContext : DbContext
     {
