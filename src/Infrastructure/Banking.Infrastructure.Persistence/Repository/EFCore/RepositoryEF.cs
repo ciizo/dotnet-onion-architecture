@@ -1,5 +1,4 @@
 ﻿using Banking.Domain.Entities.Repository;
-using Banking.Domain.Entities.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
@@ -10,14 +9,11 @@ namespace Banking.Infrastructure.Persistence.Repository.EFCore
         where TEntity : class
         where TContext : IDbContext
     {
-        protected readonly IUnitOfWork<TContext> _unitOfWork;
-
         protected readonly DbSet<TEntity> _dbSet;
 
-        public RepositoryEF(IUnitOfWork<TContext> unitOfWork)
+        public RepositoryEF(TContext dbContext)
         {
-            _unitOfWork = unitOfWork;
-            _dbSet = _unitOfWork.Context.Set<TEntity>();
+            _dbSet = dbContext.Set<TEntity>();
         }
 
         public virtual IEnumerable<TEntity> Get() => _dbSet.AsEnumerable();

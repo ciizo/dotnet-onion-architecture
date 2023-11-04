@@ -16,8 +16,8 @@ namespace Banking.Domain.Service.Test
             var dbContextMock = TestHelper.GetDbContext(initialEntities);
             var uow = new UnitOfWork<IDbContext>(dbContextMock.Object);
             _transactionService = new TransactionService(
-                new RepositoryEF<Transaction, IDbContext>(uow),
-                new RepositoryEF<Account, IDbContext>(uow),
+                new RepositoryEF<Transaction, IDbContext>(dbContextMock.Object),
+                new RepositoryEF<Account, IDbContext>(dbContextMock.Object),
                 uow);
         }
 
