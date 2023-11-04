@@ -1,3 +1,3 @@
-# dotnet-banking-assessment
+# dotnet-onion-architecture
 
 CRUD REST API with Onion architecture
