@@ -1,4 +1,4 @@
-﻿namespace Banking.Infrastructure.Share.Constants
+﻿namespace Banking.Domain.Entities.Constants
 {
     public static class Enums
     {

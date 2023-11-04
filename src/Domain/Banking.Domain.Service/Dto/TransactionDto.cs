@@ -1,5 +1,5 @@
 ﻿using Banking.Domain.Entities;
-using Banking.Infrastructure.Share.Constants;
+using Banking.Domain.Entities.Constants;
 
 namespace Banking.Domain.Service.Dto
 {

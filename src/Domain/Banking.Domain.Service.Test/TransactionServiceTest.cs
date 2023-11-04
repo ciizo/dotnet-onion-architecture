@@ -1,9 +1,9 @@
 using Banking.Domain.Entities;
+using Banking.Domain.Entities.Constants;
 using Banking.Domain.Entities.Repository;
 using Banking.Domain.Service.TransactionLogic;
 using Banking.Infrastructure.Persistence.Repository.EFCore;
 using Banking.Infrastructure.Persistence.UnitOfWork;
-using Banking.Infrastructure.Share.Constants;
 
 namespace Banking.Domain.Service.Test
 {

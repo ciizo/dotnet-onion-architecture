@@ -1,4 +1,4 @@
-﻿using Banking.Infrastructure.Share.Constants;
+﻿using Banking.Domain.Entities.Constants;
 using System.ComponentModel.DataAnnotations;
 
 namespace Banking.Domain.Entities

@@ -1,8 +1,8 @@
 ﻿using Banking.Domain.Entities;
+using Banking.Domain.Entities.Constants;
 using Banking.Domain.Entities.Repository;
 using Banking.Domain.Entities.UnitOfWork;
 using Banking.Domain.Service.Dto;
-using Banking.Infrastructure.Share.Constants;
 using Microsoft.EntityFrameworkCore;
 
 namespace Banking.Domain.Service.TransactionLogic
