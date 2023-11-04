@@ -33,7 +33,7 @@ namespace Banking.Domain.Service.Test
 
             var result = await _transactionService.Deposit(id, amount);
 
-            Assert.Equal(FeeService.ApplyFee(Enums.TransactionType.Deposit, amount), result.Amount);
+            Assert.Equal(FeeServiceHelper.ApplyFee(Enums.TransactionType.Deposit, amount), result.Amount);
             Assert.Equal(Enums.TransactionStatus.Success, result.Status);
             Assert.Equal(Enums.TransactionType.Deposit, result.Type);
             Assert.Equal(id, result.DestinationAccountID);
@@ -66,7 +66,7 @@ namespace Banking.Domain.Service.Test
 
             var result = await _transactionService.ProcessTransfer(srcAccount.ID, destAccount.ID, amount);
 
-            Assert.Equal(FeeService.ApplyFee(Enums.TransactionType.Transfer, amount), result.Amount);
+            Assert.Equal(FeeServiceHelper.ApplyFee(Enums.TransactionType.Transfer, amount), result.Amount);
             Assert.Equal(Enums.TransactionStatus.Success, result.Status);
             Assert.Equal(Enums.TransactionType.Transfer, result.Type);
             Assert.Equal(destAccount.ID, result.DestinationAccountID);

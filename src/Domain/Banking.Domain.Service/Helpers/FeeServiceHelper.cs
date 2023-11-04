@@ -2,7 +2,7 @@
 
 namespace Banking.Domain.Service.TransactionLogic
 {
-    public class FeeService
+    public static class FeeServiceHelper
     {
         public static decimal ApplyFee(Enums.TransactionType type, decimal amount)
         {

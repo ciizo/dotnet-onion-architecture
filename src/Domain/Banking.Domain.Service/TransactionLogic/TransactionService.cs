@@ -43,7 +43,7 @@ namespace Banking.Domain.Service.TransactionLogic
                 DestinationAccountID = accountId,
                 CreatedOn = DateTime.UtcNow,
             };
-            entity.Amount = FeeService.ApplyFee(entity.Type, amount);
+            entity.Amount = FeeServiceHelper.ApplyFee(entity.Type, amount);
             //TODO maybe need to create transaction type Fee with central account as DestinationAccount
 
             var destAccount = await _accountRepository.GetByIdAsync(accountId);
@@ -91,7 +91,7 @@ namespace Banking.Domain.Service.TransactionLogic
                 SourceAccountID = fromAccountId,
                 CreatedOn = DateTime.UtcNow,
             };
-            entity.Amount = FeeService.ApplyFee(entity.Type, srcAmount);
+            entity.Amount = FeeServiceHelper.ApplyFee(entity.Type, srcAmount);
             //TODO maybe need to create transaction type Fee with central account as DestinationAccount
 
             var srcAccount = await _accountRepository.GetByIdAsync(entity.SourceAccountID);
