@@ -16,8 +16,6 @@ namespace Banking.Application.API
         {
             builder.Services.AddScoped<IAccountService, AccountService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
-
-            builder.Services.AddScoped<IIBAN_Service, IBAN_Service>();
         }
 
         public static void RegisterPersistence(this WebApplicationBuilder builder)
